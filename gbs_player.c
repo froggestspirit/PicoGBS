@@ -78,7 +78,7 @@ int main(void) {
      * multiple of typical audio sampling rates.
      */
     stdio_init_all();
-    set_sys_clock_khz(176000, true); 
+    set_sys_clock_khz(132000, true); 
     gpio_set_function(AUDIO_PIN_L, GPIO_FUNC_PWM);
     gpio_set_function(AUDIO_PIN_R, GPIO_FUNC_PWM);
 
@@ -119,7 +119,7 @@ int main(void) {
      *  4.0f for 22 KHz
      *  2.0f for 44 KHz etc
      */
-    pwm_config_set_clkdiv( & config, 16.0f); 
+    pwm_config_set_clkdiv( & config, 12.0f); 
     pwm_config_set_wrap( & config, 250); 
     pwm_init(audio_pin_slice_l, & config, true);
     pwm_init(audio_pin_slice_r, & config, true);
@@ -151,7 +151,6 @@ int main(void) {
 				}
 				gb.gb_frame = 0;
 				while(!gb.gb_frame) __gb_step_cpu(&gb);
-				if(++gb.audio.idleTimer >= MUTE_THRESHOLD) fadeout = 0;  // Setting fadeout to 0 will trigger the next song on the next gbframe
 				
 				switch(gb.hram[0x11] & 0xC0){
 					case 0x00:
@@ -317,6 +316,7 @@ int main(void) {
 			}else{
 				mutedTime = 0;
 			}
+			if(++gb.audio.idleTimer >= MUTE_THRESHOLD) fadeout = 0;  // Setting fadeout to 0 will trigger the next song on the next gbframe
 			if(++fillPos >= BUFFER_SIZE) fillPos -= BUFFER_SIZE;
 		}else{
         __wfi(); // Wait for Interrupt

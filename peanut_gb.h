@@ -533,7 +533,7 @@ void __gb_write(struct gb_s *gb, const uint_fast16_t addr, const uint8_t val){
         }
 
         if((addr >= 0xFF10) && (addr <= 0xFF2F)){
-            gb->audio.idleTimer = 0;
+            if(gb->hram[addr - IO_ADDR] != val) gb->audio.idleTimer = 0;
             switch(addr & 0xFF){
 
                 case 0x10://ch1 sweep
@@ -673,7 +673,6 @@ void __gb_write(struct gb_s *gb, const uint_fast16_t addr, const uint8_t val){
         }
 
         if((addr >= 0xFF30) && (addr <= 0xFF3F)){
-            gb->audio.idleTimer = 0;
             gb->audio.WAVRAM[((addr & 0x0F) << 1)] = -15 + ((val & 0xF0) >> 3);
             gb->audio.WAVRAM[((addr & 0x0F) << 1) + 1] = -15 + ((val & 0x0F) << 1);
         return;

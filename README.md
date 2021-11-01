@@ -4,7 +4,7 @@ By FroggestSpirit
 
 This is a POC GBS player, based on a PWM sound example by Robin Grosset, and a heavily modified paenut-gb emulator by Mahyar Koshkouei
 
-By using this, I am not liable to any damage to hardware caused by this
+By using this, I am not liable to any damage to hardware caused by this. Code is set to overclock the pi a little, to 132Mhz
 
 
 GBS file will need to be converted to a header file named "gbs.h" if using bash, you can run "convertGBS.sh" and it *should* create a gbs.h file from a gbs.gbs in the same folder
@@ -19,7 +19,7 @@ Not everything works right now, and is subject to improvements over time. I may 
 
 Features:
 - Play GBS files in stereo, through pins 27 and 28
-- Tracks play for a default of 90 seconds (can be changed in gbs_player.c)
+- Tracks play for a default of 90 seconds (can be changed in gbs_player.c), then fade out
 - Tracks that do not loop, and end, attempt to detect this, and start the next song after 4 seconds
 
 Known Bugs:
