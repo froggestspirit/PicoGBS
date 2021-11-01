@@ -10,9 +10,7 @@ By using this, I am not liable to any damage to hardware caused by this
 GBS file will need to be converted to a header file named "gbs.h" if using bash, you can run "convertGBS.sh" and it *should* create a gbs.h file from a gbs.gbs in the same folder
 
 To build, the raspberry pi C/C++ SDK needs to be installed. In the gbs player folder:
--   mkdir build
-    cd build
-    cmake ..
+mkdir build && cd build && cmake ..
 
 
 Not everything works right now, and is subject to improvements over time. I may be looking into loading files from an SD, or a small display
