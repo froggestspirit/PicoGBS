@@ -1,0 +1,1 @@
+echo "static uint8_t gbs[] = {" > gbs.h && hd -v gbs.gbs | sed 's/ \+|.\+|/,/g' | sed 's/  \| /, 0x/g' | sed 's/[0-9a-z]\{8\},\?//g' >> gbs.h && echo "};" >> gbs.h
